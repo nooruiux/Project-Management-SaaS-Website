@@ -1,10 +1,10 @@
 import type { StaticImageData } from "next/image";
-import alarmClock from "@/public/figma/feature-alarm-clock.svg";
-import chart from "@/public/figma/feature-chart.svg";
-import database from "@/public/figma/feature-database.svg";
-import invoice from "@/public/figma/feature-invoice.svg";
-import settings from "@/public/figma/feature-settings.svg";
-import users from "@/public/figma/feature-users.svg";
+import alarmClock from "@/public/figma/feature-alarm-clock.webp";
+import chart from "@/public/figma/feature-chart.webp";
+import database from "@/public/figma/feature-database.webp";
+import invoice from "@/public/figma/feature-invoice.webp";
+import settings from "@/public/figma/feature-settings.webp";
+import users from "@/public/figma/feature-users.webp";
 
 export type Feature = {
   title: string;
