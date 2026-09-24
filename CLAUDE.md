@@ -162,5 +162,10 @@ Record every intentional deviation from Figma here as it happens (section, what,
 | Hero / metadata | Copy: "organizing tasks, track progress" → "organizing tasks, tracking progress" | Grammar fix approved by client (also in meta description / OG / Twitter) |
 | Hero    | Lead paragraph max-width 637 → 681px | Longer approved copy would wrap to 3 lines at 637px |
 | Logo cloud | Caption colour #475467 → `ink-muted` (#484448) | Nearest text token; contrast 9.4:1 |
+| Features | H2 48px → `text-h2` (40px) | Global H2 rule |
+| Features | Grid columns aligned (3-col grid, 88px gaps) — Figma row 1 drifts ~13px from row 2 | Figma "hug" rows; aligned grid matches row 2 exactly |
+| Features | Lead: "with Workup . … organizing tasks, track progress." → "with WorkUp. … organizing tasks and tracking progress." | Obvious typo/grammar fix |
+| Features | "optimises" → "optimizes" | US spelling used elsewhere on the page |
+| Features | Card title "Invoicing and Payment Tracking" #000@80% → `ink` | Normalization rule; other titles are ink |
 | Navbar  | Dropdown panels (Product/Solutions/Resources) list the matching footer-column links; panel styling is ours. **TODO: mega menu — awaiting Figma design** | Figma shows chevrons but no open state |
 | Navbar  | Scrolled state: white/80 + blur + 1px divider; mobile (<1024) hamburger + right sheet using lucide `Menu`/`X` | No scrolled or mobile frames in Figma |

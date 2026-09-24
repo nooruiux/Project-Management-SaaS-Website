@@ -1,3 +1,4 @@
+import { Features } from "@/components/sections/features";
 import { Hero, HeroBackground } from "@/components/sections/hero";
 import { LogoCloud } from "@/components/sections/logo-cloud";
 import { Navbar } from "@/components/sections/navbar";
@@ -16,6 +17,7 @@ export default function Home() {
       <main id="main">
         <Hero />
         <LogoCloud />
+        <Features />
       </main>
     </div>
   );
