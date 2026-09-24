@@ -17,8 +17,9 @@ const testimonialCells = [
 export function Testimonials() {
   const { title, description } = testimonials;
 
+  // overflow-hidden: below 1280 the section is shorter than the 696px pattern — don't let it paint over the footer.
   return (
-    <section aria-labelledby="testimonials-title" className="relative isolate pt-16 pb-32">
+    <section aria-labelledby="testimonials-title" className="relative isolate overflow-hidden pt-16 pb-32">
       <GridPattern
         className="top-[324px]"
         height={696}
