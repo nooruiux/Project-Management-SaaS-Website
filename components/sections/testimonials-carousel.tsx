@@ -171,7 +171,11 @@ export function TestimonialsCarousel() {
       {/* <1280 swipe track */}
       <div
         ref={trackRef}
-        className="-mx-(--gutter) flex w-[calc(100%+2*var(--gutter))] snap-x snap-mandatory scroll-px-(--gutter) gap-5 overflow-x-auto px-(--gutter) [scrollbar-width:none] xl:hidden [&::-webkit-scrollbar]:hidden"
+        // Scrollable region must be keyboard-reachable (axe scrollable-region-focusable); ←/→ are handled by the region.
+        tabIndex={0}
+        role="group"
+        aria-label="Testimonials, use left and right arrow keys to browse"
+        className="-mx-(--gutter) flex -outline-offset-2 w-[calc(100%+2*var(--gutter))] snap-x snap-mandatory scroll-px-(--gutter) gap-5 overflow-x-auto px-(--gutter) [scrollbar-width:none] xl:hidden [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item, i) => (
           <div
