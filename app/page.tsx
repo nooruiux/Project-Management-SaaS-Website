@@ -1,36 +1,24 @@
 import { DeliverProjects } from "@/components/sections/deliver-projects";
 import { Features } from "@/components/sections/features";
-import { Footer } from "@/components/sections/footer";
-import { Hero, HeroBackground } from "@/components/sections/hero";
+import { Hero } from "@/components/sections/hero";
 import { Integrations } from "@/components/sections/integrations";
 import { LogoCloud } from "@/components/sections/logo-cloud";
-import { Navbar } from "@/components/sections/navbar";
-import { Testimonials } from "@/components/sections/testimonials";
 import { StrategicPlanning } from "@/components/sections/strategic-planning";
+import { Testimonials } from "@/components/sections/testimonials";
 import { WorkFaster } from "@/components/sections/work-faster";
+import { SiteShell } from "@/components/site-shell";
 
 export default function Home() {
   return (
-    <div className="relative isolate">
-      <a
-        href="#main"
-        className="sr-only z-50 min-h-11 items-center rounded-sm bg-surface px-4 font-semibold text-ink shadow-xl focus:not-sr-only focus:fixed focus:inline-flex focus:top-4 focus:left-4"
-      >
-        Skip to content
-      </a>
-      <HeroBackground />
-      <Navbar />
-      <main id="main">
-        <Hero />
-        <LogoCloud />
-        <Features />
-        <WorkFaster />
-        <StrategicPlanning />
-        <DeliverProjects />
-        <Integrations />
-        <Testimonials />
-      </main>
-      <Footer />
-    </div>
+    <SiteShell>
+      <Hero />
+      <LogoCloud />
+      <Features />
+      <WorkFaster />
+      <StrategicPlanning />
+      <DeliverProjects />
+      <Integrations />
+      <Testimonials />
+    </SiteShell>
   );
 }

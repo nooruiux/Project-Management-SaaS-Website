@@ -25,7 +25,7 @@ export function DeliverProjects() {
   const { title, description, measure, efficiency } = deliverProjects;
 
   return (
-    <section aria-labelledby="deliver-title" className="py-16">
+    <section id="deliver-projects" aria-labelledby="deliver-title" className="py-16">
       <div className="container-site">
         <div className="mx-auto flex max-w-[1104px] flex-col items-center gap-16">
           <SectionHeading

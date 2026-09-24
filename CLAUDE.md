@@ -195,6 +195,7 @@ Record every intentional deviation from Figma here as it happens (section, what,
 | Footer  | Text at `ink/80` (Figma value), not `ink-muted` | 5.7:1 on the cyan band; opaque ink-muted would be 4.4:1 |
 | Footer  | Copyright year rendered from the build date (Figma: "© 2025") | Keeps the notice current |
 | Footer  | Newsletter status microcopy added (pending / already subscribed / invalid / rate-limited / unavailable / error); error text in ink with a red field border | Required for accessible form states; brand red text on cyan is ~3.2:1 |
-| Footer  | Social / footer link hrefs are `#` | No URLs in Figma — client to supply |
+| Footer  | Social icons hidden (`SHOW_SOCIAL = false`). **TODO: social URLs** | No profile URLs yet — client decision |
+| Links   | No `href="#"` anywhere: on-page topics anchor to sections (`/#features`, `/#deliver-projects`, `/#strategic-planning`, `/#testimonials`, `/#integrations`); everything else → `/coming-soon` (noindex). Map lives in `content/routes.ts` + `content/navigation.ts` | Client decision — replace coming-soon targets as real pages ship |
 | Navbar  | Dropdown panels (Product/Solutions/Resources) list the matching footer-column links; panel styling is ours. **TODO: mega menu — awaiting Figma design** | Figma shows chevrons but no open state |
 | Navbar  | Scrolled state: white/80 + blur + 1px divider; mobile (<1024) hamburger + right sheet using lucide `Menu`/`X` | No scrolled or mobile frames in Figma |

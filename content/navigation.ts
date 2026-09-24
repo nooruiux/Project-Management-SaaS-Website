@@ -1,3 +1,5 @@
+import { routes } from "@/content/routes";
+
 export type NavLink = {
   label: string;
   href: string;
@@ -24,40 +26,40 @@ export const footerColumns: FooterColumn[] = [
   {
     title: "Product",
     links: [
-      { label: "Task Management", href: "#" },
-      { label: "Dashboard & Reporting", href: "#" },
-      { label: "WorkUp CRM", href: "#" },
-      { label: "Automations", href: "#" },
-      { label: "AI Chatbot", href: "#" },
+      { label: "Task Management", href: routes.features },
+      { label: "Dashboard & Reporting", href: routes.deliverProjects },
+      { label: "WorkUp CRM", href: routes.comingSoon },
+      { label: "Automations", href: routes.strategicPlanning },
+      { label: "AI Chatbot", href: routes.comingSoon },
     ],
   },
   {
     title: "Solutions",
     links: [
-      { label: "Project Management", href: "#" },
-      { label: "Product Development", href: "#" },
-      { label: "Operation", href: "#" },
-      { label: "Sales & Marketing", href: "#" },
-      { label: "Human Resources", href: "#" },
+      { label: "Project Management", href: routes.deliverProjects },
+      { label: "Product Development", href: routes.comingSoon },
+      { label: "Operation", href: routes.comingSoon },
+      { label: "Sales & Marketing", href: routes.comingSoon },
+      { label: "Human Resources", href: routes.comingSoon },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Customer Stories", href: "#" },
-      { label: "Webinars", href: "#" },
-      { label: "Video Tutorials", href: "#" },
-      { label: "Careers", href: "#", badge: "New" },
-      { label: "Blog", href: "#" },
-      { label: "Support Services", href: "#" },
+      { label: "Customer Stories", href: routes.testimonials },
+      { label: "Webinars", href: routes.comingSoon },
+      { label: "Video Tutorials", href: routes.comingSoon },
+      { label: "Careers", href: routes.comingSoon, badge: "New" },
+      { label: "Blog", href: routes.comingSoon },
+      { label: "Support Services", href: routes.comingSoon },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Terms and Conditions", href: "#" },
-      { label: "Privacy Policy", href: "#" },
-      { label: "Cookies Policy", href: "#" },
+      { label: "Terms and Conditions", href: routes.comingSoon },
+      { label: "Privacy Policy", href: routes.comingSoon },
+      { label: "Cookies Policy", href: routes.comingSoon },
     ],
   },
 ];
@@ -65,21 +67,22 @@ export const footerColumns: FooterColumn[] = [
 const menuFor = (title: string) => footerColumns.find((c) => c.title === title)?.links;
 
 export const primaryNav: NavItem[] = [
-  { label: "Product", href: "#", menu: menuFor("Product") },
-  { label: "Solutions", href: "#", menu: menuFor("Solutions") },
-  { label: "Resources", href: "#", menu: menuFor("Resources") },
-  { label: "Pricing", href: "#" },
-  { label: "Blog", href: "#" },
+  { label: "Product", href: routes.comingSoon, menu: menuFor("Product") },
+  { label: "Solutions", href: routes.comingSoon, menu: menuFor("Solutions") },
+  { label: "Resources", href: routes.comingSoon, menu: menuFor("Resources") },
+  { label: "Pricing", href: routes.comingSoon },
+  { label: "Blog", href: routes.comingSoon },
 ];
 
 export const authNav = {
-  login: { label: "Login", href: "#" },
-  cta: { label: "Start free trial", href: "#" },
+  login: { label: "Login", href: routes.comingSoon },
+  cta: { label: "Start free trial", href: routes.comingSoon },
 } satisfies Record<string, NavLink>;
 
+// TODO: social URLs — icons are hidden in the footer until real profile links exist.
 export const socialLinks: SocialLink[] = [
-  { label: "WorkUp on X", href: "#", icon: "x" },
-  { label: "WorkUp on LinkedIn", href: "#", icon: "linkedin" },
-  { label: "WorkUp on Facebook", href: "#", icon: "facebook" },
-  { label: "WorkUp on GitHub", href: "#", icon: "github" },
+  { label: "WorkUp on X", href: routes.comingSoon, icon: "x" },
+  { label: "WorkUp on LinkedIn", href: routes.comingSoon, icon: "linkedin" },
+  { label: "WorkUp on Facebook", href: routes.comingSoon, icon: "facebook" },
+  { label: "WorkUp on GitHub", href: routes.comingSoon, icon: "github" },
 ];
