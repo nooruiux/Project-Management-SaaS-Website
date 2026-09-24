@@ -1,4 +1,5 @@
 import { Hero, HeroBackground } from "@/components/sections/hero";
+import { LogoCloud } from "@/components/sections/logo-cloud";
 import { Navbar } from "@/components/sections/navbar";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <Navbar />
       <main id="main">
         <Hero />
+        <LogoCloud />
       </main>
     </div>
   );
