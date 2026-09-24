@@ -28,7 +28,8 @@ export function StrategicPlanning() {
                 // Figma: 40/50, no letter-spacing.
                 titleClassName="leading-[1.25] tracking-normal"
                 // ink @ 80% (not the opaque ink-muted token): 5.7:1 on the cyan vs 4.4:1.
-                descriptionClassName="text-base leading-6 text-ink/80"
+                // Lead may run 14px into the 100px column gap (488px) so "WorkUp’s" copy keeps Figma's 2 lines.
+                descriptionClassName="text-base leading-6 text-ink/80 xl:w-[488px] xl:max-w-none"
               />
               <ul className="flex max-w-[474px] flex-wrap gap-4">
                 {capabilities.map((capability) => (

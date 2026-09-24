@@ -10,11 +10,11 @@ const manrope = Manrope({
   display: "swap",
 });
 
-// Inter is only used inside app-UI mockups built in code (section 7) and the footer.
+// Inter = body copy per Figma text styles (leads, card descriptions, table, footer). First use is below the fold.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
   preload: false,
 });
