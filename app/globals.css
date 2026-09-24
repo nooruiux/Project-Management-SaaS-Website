@@ -14,6 +14,8 @@
   /* Accents */
   --color-accent-cyan: #03bfff;
   --color-accent-cyan-soft: #d6f8ff;
+  /* Border of the cyan "Stay in sync" card (Figma 1:2933). */
+  --color-accent-cyan-line: #00c9f2;
   --color-accent-green: #25631f;
   --color-accent-red: #ae1d12;
   --color-accent-blue: #2345de;

@@ -167,5 +167,8 @@ Record every intentional deviation from Figma here as it happens (section, what,
 | Features | Lead: "with Workup . … organizing tasks, track progress." → "with WorkUp. … organizing tasks and tracking progress." | Obvious typo/grammar fix |
 | Features | "optimises" → "optimizes" | US spelling used elsewhere on the page |
 | Features | Card title "Invoicing and Payment Tracking" #000@80% → `ink` | Normalization rule; other titles are ink |
+| Tokens  | Added `accent-cyan-line #00c9f2` | Border of the cyan card in section 5; not in the base token set |
+| Work faster | Background vector `1:2598` not rendered | It is hidden in Figma, so the Figma render shows the section on white |
+| Work faster | Card descriptions #1a151a@80% → `ink-muted` | Normalization rule |
 | Navbar  | Dropdown panels (Product/Solutions/Resources) list the matching footer-column links; panel styling is ours. **TODO: mega menu — awaiting Figma design** | Figma shows chevrons but no open state |
 | Navbar  | Scrolled state: white/80 + blur + 1px divider; mobile (<1024) hamburger + right sheet using lucide `Menu`/`X` | No scrolled or mobile frames in Figma |
