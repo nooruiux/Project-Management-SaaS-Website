@@ -152,6 +152,32 @@ Don't chase sub-2px decorative diffs — list them in the PR instead.
 - **PHASE 5** — Full-page QA: responsive sweep, a11y, Lighthouse (report scores), fix issues. Add `app/opengraph-image` (1200×630, brand-styled) — og:image is currently missing. ⏸
 - **PHASE 6** — Merge to `main` → production deploy. Final report: production URL, Lighthouse scores, and every intentional deviation from Figma (with reason).
 
+## Performance status (PHASE 5, 2026-09-25) — mobile Lighthouse target not met
+
+Live Lighthouse 13.5 (3 runs, median). Desktop: Perf 99, LCP 0.65s, TBT 66ms, CLS 0.004 (LCP = hero dashboard image).
+Mobile: Perf 79, LCP 2.42s, TBT 735ms, CLS 0 (LCP = hero H1 text). Stop criteria (Perf ≥ 90, LCP ≤ 2.5s, TBT < 200ms) not met.
+
+Cause (measured):
+- TBT is the main loss. ~198KB gz JS on `/`, of which ~170KB gz is the Next 16 App Router + React 19 runtime; our own
+  client islands are ~30KB gz. Long tasks are hydration in the framework chunks (≈400ms each at 4× CPU).
+- Mobile LCP is text. Real (unthrottled) FCP = LCP ≈ 0.8–0.95s, but first paint lands after the full-page layout pass and
+  the JS chunks' evaluation, so Lighthouse's simulation (slow 4G, 4× CPU) books all of that on the LCP path → ~2.4s.
+- Local run-to-run noise is large (same build: Perf 69–94, TBT 212–1531ms).
+
+Tried and rejected (do not retry):
+- `content-visibility: auto` on below-fold sections — sections render blank in full-page captures and it changed the
+  Features heading wrap (layout containment). Reverted, never shipped.
+- Lever 1: drop `preload` on the hero dashboard (eager + fetchPriority auto) and a 420px `<768` sizes slot (750w variant).
+  Median Perf 76 → 72, LCP 3.23 → 3.78s (local prod A/B). React 19 still emits an image preload for eager srcset images.
+  Shipped as 9bbed6c, reverted in 0d247b5.
+- Lever 2: Manrope as a variable font (no weight list) — already one file per subset; only removed 18 duplicate
+  @font-face rules. Median Perf 72 vs 76. Discarded. Inter is already `preload: false` with `adjustFontFallback` on.
+- Lever 3: render-blocking CSS is 10.6KB gz (59KB raw, 13KB of it @font-face) — under the 30KB gz threshold; nothing to fix.
+
+Final judge: Vercel Speed Insights field data (real devices). Revisit only if field LCP/INP are poor.
+Note: bursts of automated Lighthouse runs against production trigger Vercel's bot checkpoint (403 "Security
+Checkpoint") for the testing IP for ~15 min; measure locally with `next start` for A/B work.
+
 ## Newsletter (Mailchimp)
 
 - `POST /api/subscribe` (`app/api/subscribe/route.ts`) → Mailchimp Marketing API, status `pending` (double opt-in). Never call Mailchimp from the client.
