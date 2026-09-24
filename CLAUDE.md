@@ -44,7 +44,7 @@ Figma layer order ≠ visual order. Build sections ONLY in this order:
 
 1. **Per-section loop**: `get_design_context(nodeId)` + `get_screenshot(nodeId)` → implement → compare in the browser at 1440px → fix spacing, font-size, line-height, letter-spacing, radius, shadow, colors until it matches.
 2. **Fonts**: all marketing text is **Manrope**. Figma variables wrongly say Inter/Montserrat — ignore them. Inter is used **only** inside app mockups.
-3. **App mockups are scaled** (fractional sizes like 13.78px). **Do NOT rebuild them in HTML.** Export hero dashboard and dense card mockups @2x from Figma → optimize to AVIF/WebP → `next/image` with explicit `width`/`height` + meaningful `alt`. Hero image gets `priority`.
+3. **App mockups are scaled** (fractional sizes like 13.78px). **Do NOT rebuild them in HTML.** Export hero dashboard and dense card mockups @2x from Figma → optimize to AVIF/WebP → `next/image` with explicit `width`/`height` + meaningful `alt`. Hero image gets `preload` (Next 16 replacement for `priority`).
    - **Exception**: the toggle list + task table in section 7 ("Deliver more projects") are built in real code (Inter).
 4. **Hero headline** "Streamline ⚡ work for team 👥 productivity": the gaps are inline elements (icon badge + avatar stack). Build as `inline-flex` spans aligned to the text baseline — **never spaces**.
 5. **Tokens first**: never hardcode a value that exists as a token. Keep exact Figma values, even off-grid, when Figma uses them.
@@ -81,7 +81,7 @@ Figma layer order ≠ visual order. Build sections ONLY in this order:
 
 ### Also in globals.css
 
-- `container-site` utility: `max-width: 1280px`, horizontal padding 20px mobile / 32px ≥768px.
+- `container-site` utility: 1280px content column, horizontal padding 20px mobile / 32px ≥768px applied outside it (approved).
 - Global `:focus-visible` ring (use `--shadow-ring-primary` / primary outline).
 - `prefers-reduced-motion: reduce` reset (kill animations/transitions, pause marquee).
 
@@ -119,7 +119,8 @@ Figma layer order ≠ visual order. Build sections ONLY in this order:
 ## Git / deploy workflow
 
 - `main` = production. Feature work on `feat/<section>` branches → push → PR → Vercel preview URL.
-- Each PR description lists any remaining visual diffs vs Figma.
+- Each PR description lists any remaining visual diffs vs Figma, plus any typos/grammar issues found in that section's Figma copy (obvious ones are fixed and logged in the deviations table).
+- Preview deployments stay behind Vercel protection; QA uses the preview URLs in a Chrome session signed in to Vercel.
 - Commit messages: conventional commits (`feat:`, `fix:`, `chore:`).
 
 ## Execution plan — STOP at every ⏸ and wait for the user's "continue"
@@ -129,7 +130,7 @@ Figma layer order ≠ visual order. Build sections ONLY in this order:
 - **PHASE 2** — Vercel: create project linked to the repo (Next.js), production branch `main`, previews on other branches. Report production URL. ⏸
 - **PHASE 3** — Navbar + Hero on `feat/hero` → visual QA at 1440 + 375 → commit, push, PR, share preview URL + remaining diffs. ⏸
 - **PHASE 4** — Sections 3–10, one branch + PR each (`feat/<section>`), same QA loop. ⏸ after sections 5, 8 and 10.
-- **PHASE 5** — Full-page QA: responsive sweep, a11y, Lighthouse (report scores), fix issues. ⏸
+- **PHASE 5** — Full-page QA: responsive sweep, a11y, Lighthouse (report scores), fix issues. Add `app/opengraph-image` (1200×630, brand-styled) — og:image is currently missing. ⏸
 - **PHASE 6** — Merge to `main` → production deploy. Final report: production URL, Lighthouse scores, and every intentional deviation from Figma (with reason).
 
 ## Deviations log
@@ -141,3 +142,9 @@ Record every intentional deviation from Figma here as it happens (section, what,
 | Tokens  | Added `primary-tint #f9f5ff`, `primary-border #e9d7fe`, `primary-ink #5931b6`, `primary-wash #f1f4ff`, `shadow-knob` | Used by the Figma "Update" chip, "New" badge and toggle knob; not covered by the base token set |
 | Global  | `container-site` = 1280px content + gutters outside it (max-width 1344 at ≥768) | Figma content column is exactly 1280 wide (x=80 in 1440) |
 | Button  | `sm` size (h44 px20 14px) has no Figma source | Variant set required by spec; 44px keeps tap-target rule |
+| Navbar  | Copy: "Start free trail" → "Start free trial" | Typo fix approved by client |
+| Hero    | Copy: "Start 14-days trial" → "Start 14-day trial" | Grammar fix approved by client |
+| Hero / metadata | Copy: "organizing tasks, track progress" → "organizing tasks, tracking progress" | Grammar fix approved by client (also in meta description / OG / Twitter) |
+| Hero    | Lead paragraph max-width 637 → 681px | Longer approved copy would wrap to 3 lines at 637px |
+| Navbar  | Dropdown panels (Product/Solutions/Resources) list the matching footer-column links; panel styling is ours | Figma shows chevrons but no open state |
+| Navbar  | Scrolled state: white/80 + blur + 1px divider; mobile (<1024) hamburger + right sheet using lucide `Menu`/`X` | No scrolled or mobile frames in Figma |

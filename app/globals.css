@@ -54,6 +54,17 @@
   --shadow-ring-primary: 0 0 0 4px #633bc03d;
   /* Toggle knob (Figma: 0 1px 3px #1018281a, 0 1px 2px #1018280f) */
   --shadow-knob: 0 1px 3px #1018281a, 0 1px 2px #1018280f;
+
+  /* Motion */
+  --animate-fade-in: fade-in 200ms ease-out both;
+  --animate-sheet-in: sheet-in 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+  }
+  @keyframes sheet-in {
+    from { transform: translateX(100%); }
+  }
 }
 
 /* Font families reference next/font variables set on <html>, so they must resolve at use-site. */
