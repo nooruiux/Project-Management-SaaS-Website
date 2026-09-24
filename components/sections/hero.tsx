@@ -183,9 +183,12 @@ export function Hero() {
             alt={hero.dashboardAlt}
             width={1224}
             height={792}
-            preload
+            // Not preloaded: the mobile LCP is the H1, so this must not compete with the font/CSS.
+            loading="eager"
+            fetchPriority="auto"
             quality={90}
-            sizes="(min-width: 1288px) 1224px, (min-width: 768px) calc(100vw - 64px), 720px"
+            // <768: 720 CSS px wide but mostly off-canvas; 420px keeps ≤2x phones on the 750w variant.
+            sizes="(min-width: 1288px) 1224px, (min-width: 768px) calc(100vw - 64px), 420px"
             className="h-auto w-[720px] max-w-none md:w-full md:max-w-full"
           />
         </div>
