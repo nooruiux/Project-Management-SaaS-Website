@@ -177,5 +177,7 @@ Record every intentional deviation from Figma here as it happens (section, what,
 | Deliver projects | Copy: "WorkUp believe in the power of data" → "WorkUp believes…" | Obvious grammar fix |
 | Deliver projects | Table copy: "Design fintech saas landing page" → "…fintech SaaS landing page" | Obvious casing fix (real text, not baked) |
 | Deliver projects | Table chevrons, "…" / "+" icons and "Add project" are decorative (not buttons); checkboxes are real | No behaviour designed; fake controls would hurt a11y |
+| Integrations | <1024: centred tile grid (3 / 4 per row) without the orbit rings and dots | Client direction — orbit isn't shrunk on small screens |
+| Integrations | Background PNG (4096×2325, 7 MB) downscaled to a 2480×1408 WebP (54 KB) | Performance; next/image serves AVIF/WebP at display size |
 | Navbar  | Dropdown panels (Product/Solutions/Resources) list the matching footer-column links; panel styling is ours. **TODO: mega menu — awaiting Figma design** | Figma shows chevrons but no open state |
 | Navbar  | Scrolled state: white/80 + blur + 1px divider; mobile (<1024) hamburger + right sheet using lucide `Menu`/`X` | No scrolled or mobile frames in Figma |
