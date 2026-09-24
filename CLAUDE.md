@@ -186,5 +186,9 @@ Record every intentional deviation from Figma here as it happens (section, what,
 | Testimonials | Subtitle "Real stories, real success…" set in Inter Medium 18/28 | Figma uses a Montserrat text style ("Text lg/Medium"); client rule: body copy = Inter, no extra font |
 | Testimonials | Copy: "Hubspot" → "HubSpot" | Brand casing |
 | Testimonials | Carousel behaviour: ≥1280 prev/next rotate which of the 3 testimonials is featured (card colour follows the slot); <1280 swipeable scroll-snap track | Figma shows one static state; no extra testimonials exist, so nothing is invented |
+| Footer  | Text at `ink/80` (Figma value), not `ink-muted` | 5.7:1 on the cyan band; opaque ink-muted would be 4.4:1 |
+| Footer  | Copyright year rendered from the build date (Figma: "© 2025") | Keeps the notice current |
+| Footer  | Newsletter validation / success microcopy added; error text in ink with a red field border | Required for accessible form states; brand red text on cyan is ~3.2:1. **No backend yet — TODO: wire the provider** |
+| Footer  | Social / footer link hrefs are `#` | No URLs in Figma — client to supply |
 | Navbar  | Dropdown panels (Product/Solutions/Resources) list the matching footer-column links; panel styling is ours. **TODO: mega menu — awaiting Figma design** | Figma shows chevrons but no open state |
 | Navbar  | Scrolled state: white/80 + blur + 1px divider; mobile (<1024) hamburger + right sheet using lucide `Menu`/`X` | No scrolled or mobile frames in Figma |
