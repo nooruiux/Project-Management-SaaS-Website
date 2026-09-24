@@ -1,9 +1,12 @@
 export type NavLink = {
   label: string;
   href: string;
-  /** Top-level items rendered with a dropdown chevron in the navbar. */
-  hasDropdown?: boolean;
   badge?: string;
+};
+
+export type NavItem = NavLink & {
+  /** Items with a chevron in Figma; their menu reuses the matching footer column's links. */
+  menu?: NavLink[];
 };
 
 export type FooterColumn = {
@@ -16,20 +19,6 @@ export type SocialLink = {
   href: string;
   icon: "x" | "linkedin" | "facebook" | "github";
 };
-
-export const primaryNav: NavLink[] = [
-  { label: "Product", href: "#", hasDropdown: true },
-  { label: "Solutions", href: "#", hasDropdown: true },
-  { label: "Resources", href: "#", hasDropdown: true },
-  { label: "Pricing", href: "#" },
-  { label: "Blog", href: "#" },
-];
-
-export const authNav = {
-  login: { label: "Login", href: "#" },
-  // Figma copy reads "Start free trail" — kept verbatim pending client confirmation.
-  cta: { label: "Start free trail", href: "#" },
-} satisfies Record<string, NavLink>;
 
 export const footerColumns: FooterColumn[] = [
   {
@@ -72,6 +61,21 @@ export const footerColumns: FooterColumn[] = [
     ],
   },
 ];
+
+const menuFor = (title: string) => footerColumns.find((c) => c.title === title)?.links;
+
+export const primaryNav: NavItem[] = [
+  { label: "Product", href: "#", menu: menuFor("Product") },
+  { label: "Solutions", href: "#", menu: menuFor("Solutions") },
+  { label: "Resources", href: "#", menu: menuFor("Resources") },
+  { label: "Pricing", href: "#" },
+  { label: "Blog", href: "#" },
+];
+
+export const authNav = {
+  login: { label: "Login", href: "#" },
+  cta: { label: "Start free trial", href: "#" },
+} satisfies Record<string, NavLink>;
 
 export const socialLinks: SocialLink[] = [
   { label: "WorkUp on X", href: "#", icon: "x" },

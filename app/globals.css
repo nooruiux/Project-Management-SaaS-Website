@@ -14,7 +14,14 @@
   /* Accents */
   --color-accent-cyan: #03bfff;
   --color-accent-cyan-soft: #d6f8ff;
+  /* Border of the cyan "Stay in sync" card (Figma 1:2933). */
+  --color-accent-cyan-line: #00c9f2;
   --color-accent-green: #25631f;
+  /* Section 7 card fills + priority badge fills (Figma 1:2760 / 1:2791 / 1:2854–2872). */
+  --color-accent-blue-soft: #cedaff;
+  --color-accent-green-soft: #d9f6d6;
+  --color-accent-red-soft: #fff0ea;
+  --color-primary-mist: #f3eff9;
   --color-accent-red: #ae1d12;
   --color-accent-blue: #2345de;
   --color-accent-orange: #ff4405;
@@ -54,12 +61,50 @@
   --shadow-ring-primary: 0 0 0 4px #633bc03d;
   /* Toggle knob (Figma: 0 1px 3px #1018281a, 0 1px 2px #1018280f) */
   --shadow-knob: 0 1px 3px #1018281a, 0 1px 2px #1018280f;
+
+  /* Motion */
+  --animate-fade-in: fade-in 200ms ease-out both;
+  --animate-sheet-in: sheet-in 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* Two identical lists + one 22px gap: shift by half the track plus half a gap for a seamless loop. */
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+  }
+  @keyframes sheet-in {
+    from { transform: translateX(100%); }
+  }
+  @keyframes marquee {
+    to { transform: translateX(calc(-50% - 11px)); }
+  }
 }
 
 /* Font families reference next/font variables set on <html>, so they must resolve at use-site. */
 @theme inline {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-ui: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/*
+ * Horizontal scroll region with a right-edge fade. Where scroll-driven animations are supported,
+ * the fade disappears once the region is scrolled to the end.
+ */
+@utility scroll-fade-x {
+  mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent);
+
+  @media (width >= 80rem) {
+    mask-image: none;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    animation: scroll-fade-x-end linear both;
+    animation-timeline: scroll(self inline);
+  }
+}
+
+@keyframes scroll-fade-x-end {
+  95% { mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent); }
+  100% { mask-image: linear-gradient(to right, #000 100%, transparent); }
 }
 
 /* Content column is 1280px wide at desktop (Figma x=80 in a 1440 frame); gutters sit outside it. */
@@ -86,6 +131,11 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Anchor targets land below the 96px sticky header. */
+  :where([id]) {
+    scroll-margin-top: 6rem;
   }
 
   :focus-visible {
