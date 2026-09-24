@@ -51,6 +51,19 @@ Figma layer order ≠ visual order. Build sections ONLY in this order:
 6. **No placeholders**: no placeholder images, no invented icons, no invented copy.
 7. **Copy lives in `/content/*.ts`** as typed data (including nav + footer links).
 
+8. **Figma write rule**: never create or modify nodes on the "Home" page. If helper nodes are needed (e.g. for true 2× exports), create a page named `_claude-export`, work only there, delete the page when done, and mention it in the PR.
+   - 2× export recipe: `exportAsync({constraint:{type:"SCALE",value:2}})` → `figma.createImage(bytes)` → rectangle sized to `image.getSizeAsync()` on `_claude-export` → `get_screenshot` → crop any shadow bleed locally. (`clone().rescale(2)` breaks icon instances — don't use it.)
+9. **Images & performance**: below-the-fold images stay lazy (the default) with no preload. Only the hero dashboard is preloaded. Decorative patterns are CSS, not images, so they never become the LCP element.
+
+## QA "done" threshold (per section)
+
+Stop iterating when all of these hold:
+- element positions within **±2px** of Figma at 1440
+- pixel diff vs Figma's 1× render **< 2.5%** (excluding copy changes and text anti-aliasing)
+- no horizontal overflow at 375 / 768 / 1024 / 1280; keyboard + a11y checks pass
+
+Don't chase sub-2px decorative diffs — list them in the PR instead.
+
 ## Design tokens → `app/globals.css`
 
 ```css
@@ -121,6 +134,8 @@ Figma layer order ≠ visual order. Build sections ONLY in this order:
 - `main` = production. Feature work on `feat/<section>` branches → push → PR → Vercel preview URL.
 - Each PR description lists any remaining visual diffs vs Figma, plus any typos/grammar issues found in that section's Figma copy (obvious ones are fixed and logged in the deviations table).
 - Preview deployments stay behind Vercel protection; QA uses the preview URLs in a Chrome session signed in to Vercel.
+- Start each section branch from the latest `origin/main` (`git pull` first). If the previous section's PR isn't merged yet, branch from that section's branch and say so in the PR.
+- Open PRs with `gh pr create`; fall back to the signed-in Chrome compare page only if `gh` fails. The client merges PRs.
 - Commit messages: conventional commits (`feat:`, `fix:`, `chore:`).
 
 ## Execution plan — STOP at every ⏸ and wait for the user's "continue"
@@ -146,5 +161,6 @@ Record every intentional deviation from Figma here as it happens (section, what,
 | Hero    | Copy: "Start 14-days trial" → "Start 14-day trial" | Grammar fix approved by client |
 | Hero / metadata | Copy: "organizing tasks, track progress" → "organizing tasks, tracking progress" | Grammar fix approved by client (also in meta description / OG / Twitter) |
 | Hero    | Lead paragraph max-width 637 → 681px | Longer approved copy would wrap to 3 lines at 637px |
-| Navbar  | Dropdown panels (Product/Solutions/Resources) list the matching footer-column links; panel styling is ours | Figma shows chevrons but no open state |
+| Logo cloud | Caption colour #475467 → `ink-muted` (#484448) | Nearest text token; contrast 9.4:1 |
+| Navbar  | Dropdown panels (Product/Solutions/Resources) list the matching footer-column links; panel styling is ours. **TODO: mega menu — awaiting Figma design** | Figma shows chevrons but no open state |
 | Navbar  | Scrolled state: white/80 + blur + 1px divider; mobile (<1024) hamburger + right sheet using lucide `Menu`/`X` | No scrolled or mobile frames in Figma |
