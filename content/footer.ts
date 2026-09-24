@@ -5,10 +5,15 @@ export const footer = {
     label: "Email address",
     placeholder: "Enter your email address",
     submitLabel: "Subscribe",
-    // Validation / confirmation microcopy (not in Figma — needed for accessible form states).
+    // Validation / status microcopy (not in Figma — needed for accessible form states).
     errorEmpty: "Enter your email address.",
     errorInvalid: "Enter a valid email address, like name@company.com.",
-    success: "Thanks for subscribing! Check your inbox to confirm.",
+    submitting: "Subscribing…",
+    pending: "Almost there! Check your inbox and confirm your subscription.",
+    exists: "You're already subscribed — thanks for being with us!",
+    rateLimited: "Too many attempts. Please try again in a few minutes.",
+    unavailable: "Newsletter sign-up is temporarily unavailable. Please try again later.",
+    error: "Something went wrong. Please try again.",
   },
   // Figma reads "© 2025"; the year is rendered from the build date so it never goes stale.
   copyright: (year: number) => `© ${year} WorkUp. All rights reserved.`,
