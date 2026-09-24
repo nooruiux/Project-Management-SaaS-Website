@@ -183,5 +183,8 @@ Record every intentional deviation from Figma here as it happens (section, what,
 | Deliver projects | Copy: "…remove the busy work and efficient execution!" → "…remove the busy work, and focus on efficient execution." | Approved copy change |
 | Features / Strategic / Deliver | Lead boxes widened 559→561, 474→488 (into the column gap), 650→694px | Approved copy fixes are longer than Figma's text; keeps Figma's 2-line leads in Inter |
 | Integrations | **Accepted decision:** gradient word "integrations" kept at brand colours — worst-case 3.25:1 on the dark background | Passes WCAG AA for large text (40px bold, ≥3:1); client chose not to lighten the brand gradient |
+| Testimonials | Subtitle "Real stories, real success…" set in Inter Medium 18/28 | Figma uses a Montserrat text style ("Text lg/Medium"); client rule: body copy = Inter, no extra font |
+| Testimonials | Copy: "Hubspot" → "HubSpot" | Brand casing |
+| Testimonials | Carousel behaviour: ≥1280 prev/next rotate which of the 3 testimonials is featured (card colour follows the slot); <1280 swipeable scroll-snap track | Figma shows one static state; no extra testimonials exist, so nothing is invented |
 | Navbar  | Dropdown panels (Product/Solutions/Resources) list the matching footer-column links; panel styling is ours. **TODO: mega menu — awaiting Figma design** | Figma shows chevrons but no open state |
 | Navbar  | Scrolled state: white/80 + blur + 1px divider; mobile (<1024) hamburger + right sheet using lucide `Menu`/`X` | No scrolled or mobile frames in Figma |
