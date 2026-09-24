@@ -24,7 +24,8 @@ export const workFaster = {
     collab: {
       title: "Collab with team in real time",
       description:
-        "Collaboration with teams accountable by organizing projects and tasks in one place. Give everyone visibility into the work.",
+        // Approved copy change (was "Collaboration with teams accountable by organizing projects and tasks in one place. Give everyone visibility into the work.").
+        "Keep your team accountable by organizing projects and tasks in one place.",
       mockup: {
         src: collabMockup,
         alt: "Team map connecting Ronald Richards (Wix Developer), Jenny Wilson (UI/UX Designer), Wade Warren (Developer) and Devon Lane (Programmer) through WorkUp.",

@@ -2,6 +2,7 @@ import { Features } from "@/components/sections/features";
 import { Hero, HeroBackground } from "@/components/sections/hero";
 import { LogoCloud } from "@/components/sections/logo-cloud";
 import { Navbar } from "@/components/sections/navbar";
+import { StrategicPlanning } from "@/components/sections/strategic-planning";
 import { WorkFaster } from "@/components/sections/work-faster";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <LogoCloud />
         <Features />
         <WorkFaster />
+        <StrategicPlanning />
       </main>
     </div>
   );
