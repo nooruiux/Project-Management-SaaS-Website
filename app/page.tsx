@@ -7,10 +7,12 @@ import { StrategicPlanning } from "@/components/sections/strategic-planning";
 import { Testimonials } from "@/components/sections/testimonials";
 import { WorkFaster } from "@/components/sections/work-faster";
 import { SiteShell } from "@/components/site-shell";
+import { StructuredData } from "@/components/structured-data";
 
 export default function Home() {
   return (
     <SiteShell>
+      <StructuredData />
       <Hero />
       <LogoCloud />
       <Features />
