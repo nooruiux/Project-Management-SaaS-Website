@@ -7,7 +7,7 @@ function CardText({ card }: { card: WorkCard }) {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="text-2xl leading-[34px] font-semibold text-ink">{card.title}</h3>
-      <p className="text-base leading-6 text-ink-muted">{card.description}</p>
+      <p className="font-body text-base leading-6 text-ink-muted">{card.description}</p>
     </div>
   );
 }

@@ -17,7 +17,8 @@ export function Features() {
         <div className="mx-auto flex max-w-[1101px] flex-col items-center gap-16">
           <SectionHeading
             id="features-title"
-            className="max-w-[559px]"
+            // 559px Figma box + 2px: Inter wraps the fixed copy onto 3 lines at exactly 559.
+            className="max-w-[561px]"
             title={
               <>
                 {heading.before}{" "}
@@ -33,7 +34,8 @@ export function Features() {
             descriptionClassName="text-lg"
           />
 
-          <ul className="grid w-full grid-cols-1 gap-x-[88px] gap-y-12 md:grid-cols-2 md:gap-y-16 xl:grid-cols-3">
+          {/* ≥1280 columns use Figma's row-2 text widths (309 / 306 / 310px) so Inter descriptions wrap like Figma. */}
+          <ul className="grid w-full grid-cols-1 gap-x-[88px] gap-y-12 md:grid-cols-2 md:gap-y-16 xl:grid-cols-[309fr_306fr_310fr]">
             {items.map((item) => (
               <li key={item.title} className="flex flex-col gap-6">
                 {/* 56px tile: 2.8px primary padding around the 50.4px Figma icon, radius 11.2px. */}
@@ -41,8 +43,9 @@ export function Features() {
                   <Image src={item.icon} alt="" width={50} height={50} unoptimized className="size-[50.4px]" />
                 </span>
                 <div className="flex flex-col gap-2">
-                  <h3 className="text-xl leading-[30px] font-semibold text-ink">{item.title}</h3>
-                  <p className="text-base leading-6 text-ink-subtle">{item.description}</p>
+                  <h3 className="font-body text-xl leading-[30px] font-semibold text-ink">{item.title}</h3>
+                  {/* +4px at ≥1280: browser Inter runs <1px wider per line than Figma's, which tipped one card to 3 lines. */}
+                  <p className="font-body text-base leading-6 text-ink-subtle xl:-mr-1">{item.description}</p>
                 </div>
               </li>
             ))}

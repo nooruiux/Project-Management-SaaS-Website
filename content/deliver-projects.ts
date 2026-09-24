@@ -28,8 +28,9 @@ export type TaskRow = {
 
 export const deliverProjects = {
   title: { before: "Deliver more", highlight: "projects", after: "faster and on budget" },
+  // Approved copy change (was "…to remove the busy work and efficient execution!").
   description:
-    "Everyone moves faster when project planning and cross-team collaboration happens in one platform. Add in automations to remove the busy work and efficient execution!",
+    "Everyone moves faster when project planning and cross-team collaboration happens in one platform. Add in automations to remove the busy work, and focus on efficient execution.",
   measure: {
     title: "Measure, learn, and improve",
     // Figma: "WorkUp believe…" — subject–verb agreement fixed.

@@ -17,7 +17,7 @@ Act as a senior front-end engineer + UI/UX specialist: production-grade code, ex
 - Next.js 16, App Router, TypeScript, **no `src/` dir**, import alias `@/*`.
   - Follow Next 16 conventions: `params` / `searchParams` are async (await them), Turbopack is the default bundler, and use `proxy.ts` (not `middleware.ts`) if request interception is ever needed. `next/image`: `priority` is deprecated → use `preload` for the hero/LCP image; `images.qualities` defaults to `[75]` (add values in `next.config.ts` if another quality is needed).
 - Tailwind CSS v4 with `@theme` tokens in `app/globals.css`.
-- `next/font`: **Manrope** 400/500/600/700 (marketing, `--font-manrope`) and **Inter** 400/500/600 (app-UI mockups only, `--font-inter`).
+- `next/font`: **Manrope** 400/500/600/700 (`--font-manrope`) and **Inter** 400/500/600/700 (`--font-inter`). See Typography below.
 - `next/image` for all raster images.
 - Framer Motion — only subtle motion, and only where the design implies it.
 - `lucide-react` **only** if an icon matches the Figma icon exactly; otherwise export the SVG from Figma.
@@ -43,7 +43,10 @@ Figma layer order ≠ visual order. Build sections ONLY in this order:
 ## Fidelity rules (NON-NEGOTIABLE)
 
 1. **Per-section loop**: `get_design_context(nodeId)` + `get_screenshot(nodeId)` → implement → compare in the browser at 1440px → fix spacing, font-size, line-height, letter-spacing, radius, shadow, colors until it matches.
-2. **Fonts**: all marketing text is **Manrope**. Figma variables wrongly say Inter/Montserrat — ignore them. Inter is used **only** inside app mockups.
+2. **Fonts — Figma is the source of truth** (verified from the actual text nodes, 2026-09-24):
+   - **Manrope** (`font-sans`, the default): headings/display (H1, all H2s, card titles like "Stay in sync…"), nav, buttons, hero copy (pill, lead, note), logo-cloud caption, capability chips, logo wordmarks, "Join Our Newsletter".
+   - **Inter** (`font-body`): body copy on Figma's Inter text styles ("Text md/Regular", "Text lg/Regular", "Text xl/Semibold", …) — section leads (SectionHeading descriptions default to it), card descriptions, Features card titles, testimonials copy, footer text/links/column titles.
+   - **Inter** (`font-ui`): app-UI mockups built in code (section-7 toggle list + task table).
 3. **App mockups are scaled** (fractional sizes like 13.78px). **Do NOT rebuild them in HTML.** Export hero dashboard and dense card mockups @2x from Figma → optimize to AVIF/WebP → `next/image` with explicit `width`/`height` + meaningful `alt`. Hero image gets `preload` (Next 16 replacement for `priority`).
    - **Exception**: the toggle list + task table in section 7 ("Deliver more projects") are built in real code (Inter).
 4. **Hero headline** "Streamline ⚡ work for team 👥 productivity": the gaps are inline elements (icon badge + avatar stack). Build as `inline-flex` spans aligned to the text baseline — **never spaces**.
@@ -129,14 +132,12 @@ Don't chase sub-2px decorative diffs — list them in the PR instead.
 - SEO: title / description / OG / Twitter via Metadata API, canonical, JSON-LD (Organization + SoftwareApplication), sitemap, robots.
 - Performance: Lighthouse mobile **Perf ≥ 95, A11y 100, BP 100, SEO 100**; CLS < 0.05; LCP image preloaded; no client JS in sections that don't need it.
 
-## Git / deploy workflow
+## Git / deploy workflow (standing rule — client instruction)
 
-- `main` = production. Feature work on `feat/<section>` branches → push → PR → Vercel preview URL.
-- Each PR description lists any remaining visual diffs vs Figma, plus any typos/grammar issues found in that section's Figma copy (obvious ones are fixed and logged in the deviations table).
-- Preview deployments stay behind Vercel protection; QA uses the preview URLs in a Chrome session signed in to Vercel.
-- Start each section branch from the latest `origin/main` (`git pull` first). If the previous section's PR isn't merged yet, branch from that section's branch and say so in the PR.
-- Open PRs with `gh pr create`; fall back to the signed-in Chrome compare page only if `gh` fails. The client merges PRs.
-- Commit messages: conventional commits (`feat:`, `fix:`, `chore:`).
+- **Work directly on `main`. No feature branches, no PRs.** (PRs #1–#7 were merged into `main` with a merge commit on 2026-09-24; all feature branches deleted.)
+- After **every** change: run the quality gates → commit (conventional message) → `git push origin main` → wait for the Vercel **production** deployment of that commit to be READY → verify https://project-management-saa-s-website.vercel.app (sections present, all images 200, no console errors). Roll back if broken.
+- A task is not done until it is live and verified on the production URL.
+- Commit messages: conventional commits (`feat:`, `fix:`, `chore:`), ending with the Co-Authored-By trailer.
 
 ## Execution plan — STOP at every ⏸ and wait for the user's "continue"
 
@@ -162,7 +163,7 @@ Record every intentional deviation from Figma here as it happens (section, what,
 | Hero / metadata | Copy: "organizing tasks, track progress" → "organizing tasks, tracking progress" | Grammar fix approved by client (also in meta description / OG / Twitter) |
 | Hero    | Lead paragraph max-width 637 → 681px | Longer approved copy would wrap to 3 lines at 637px |
 | Logo cloud | Caption colour #475467 → `ink-muted` (#484448) | Nearest text token; contrast 9.4:1 |
-| Features | H2 48px → `text-h2` (40px) | Global H2 rule |
+| Features | H2 48px → `text-h2` (40px) | Global H2 rule (client is updating Figma to 40px) |
 | Features | Grid columns aligned (3-col grid, 88px gaps) — Figma row 1 drifts ~13px from row 2 | Figma "hug" rows; aligned grid matches row 2 exactly |
 | Features | Lead: "with Workup . … organizing tasks, track progress." → "with WorkUp. … organizing tasks and tracking progress." | Obvious typo/grammar fix |
 | Features | "optimises" → "optimizes" | US spelling used elsewhere on the page |
@@ -179,5 +180,8 @@ Record every intentional deviation from Figma here as it happens (section, what,
 | Deliver projects | Table chevrons, "…" / "+" icons and "Add project" are decorative (not buttons); checkboxes are real | No behaviour designed; fake controls would hurt a11y |
 | Integrations | <1024: centred tile grid (3 / 4 per row) without the orbit rings and dots | Client direction — orbit isn't shrunk on small screens |
 | Integrations | Background PNG (4096×2325, 7 MB) downscaled to a 2480×1408 WebP (54 KB) | Performance; next/image serves AVIF/WebP at display size |
+| Deliver projects | Copy: "…remove the busy work and efficient execution!" → "…remove the busy work, and focus on efficient execution." | Approved copy change |
+| Features / Strategic / Deliver | Lead boxes widened 559→561, 474→488 (into the column gap), 650→694px | Approved copy fixes are longer than Figma's text; keeps Figma's 2-line leads in Inter |
+| Integrations | **Accepted decision:** gradient word "integrations" kept at brand colours — worst-case 3.25:1 on the dark background | Passes WCAG AA for large text (40px bold, ≥3:1); client chose not to lighten the brand gradient |
 | Navbar  | Dropdown panels (Product/Solutions/Resources) list the matching footer-column links; panel styling is ours. **TODO: mega menu — awaiting Figma design** | Figma shows chevrons but no open state |
 | Navbar  | Scrolled state: white/80 + blur + 1px divider; mobile (<1024) hamburger + right sheet using lucide `Menu`/`X` | No scrolled or mobile frames in Figma |

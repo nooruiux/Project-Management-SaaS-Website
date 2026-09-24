@@ -10,7 +10,7 @@ function CardText({ title, description }: { title: string; description: string }
   return (
     <div className="flex flex-col gap-2">
       <h3 className="text-2xl leading-8 font-semibold text-ink">{title}</h3>
-      <p className="text-base leading-6 text-ink-muted">{description}</p>
+      <p className="font-body text-base leading-6 text-ink-muted">{description}</p>
     </div>
   );
 }
@@ -41,7 +41,8 @@ export function DeliverProjects() {
             }
             description={description}
             titleClassName="max-w-[13.5em] tracking-normal"
-            descriptionClassName="max-w-[650px] text-base leading-6 text-ink-muted"
+            // 650px Figma box → 694px: the approved longer copy needs it to stay on 2 lines.
+            descriptionClassName="max-w-[694px] text-base leading-6 text-ink-muted"
           />
 
           <div className="flex w-full flex-col gap-6">

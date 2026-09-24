@@ -49,7 +49,8 @@ export function SectionHeading({
       {description ? (
         <p
           className={cn(
-            "text-lead",
+            // Figma: every section lead uses an Inter body style.
+            "font-body text-lead",
             tone === "dark" ? "text-white/80" : "text-ink-subtle",
             descriptionClassName,
           )}

@@ -81,7 +81,10 @@
 
 /* Font families reference next/font variables set on <html>, so they must resolve at use-site. */
 @theme inline {
+  /* Figma text styles: headings/display/UI = Manrope; body copy ("Text md/Regular" etc.) = Inter. */
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* App-UI mockups built in code (also Inter). */
   --font-ui: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
