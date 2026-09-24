@@ -4,6 +4,7 @@ import { Hero, HeroBackground } from "@/components/sections/hero";
 import { Integrations } from "@/components/sections/integrations";
 import { LogoCloud } from "@/components/sections/logo-cloud";
 import { Navbar } from "@/components/sections/navbar";
+import { Testimonials } from "@/components/sections/testimonials";
 import { StrategicPlanning } from "@/components/sections/strategic-planning";
 import { WorkFaster } from "@/components/sections/work-faster";
 
@@ -26,6 +27,7 @@ export default function Home() {
         <StrategicPlanning />
         <DeliverProjects />
         <Integrations />
+        <Testimonials />
       </main>
     </div>
   );

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { GridPattern } from "@/components/ui/grid-pattern";
 import { hero } from "@/content/hero";
 import arrowRightSm from "@/public/figma/icon-arrow-right-sm.svg";
 import arrowRight from "@/public/figma/icon-arrow-right.svg";
@@ -49,17 +50,18 @@ const patternFilledCells: ReadonlyArray<readonly [number, number]> = [
 
 export function HeroBackground() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[916px] overflow-hidden">
-      <div className="absolute top-0 left-1/2 h-full w-[1440px] -translate-x-1/2 opacity-[0.32] [mask-image:radial-gradient(686.346px_1315px_at_720px_125px,#000_32%,transparent_95.3125%)]">
-        {patternFilledCells.map(([x, y]) => (
-          <span key={`${x}-${y}`} className="absolute size-16 bg-border" style={{ left: x, top: y }} />
-        ))}
-        <div className="absolute inset-x-0 top-px bottom-0 bg-[linear-gradient(to_right,transparent_63px,rgba(208,213,221,0.8)_63px),linear-gradient(to_bottom,transparent_63px,rgba(208,213,221,0.8)_63px)] bg-size-[64px_64px] bg-position-[16px_0]" />
-        <span className="absolute top-px left-[144px] h-16 w-[1216px] bg-surface opacity-90" />
-        <span className="absolute top-[65px] left-[80px] h-16 w-[1216px] bg-surface opacity-40" />
-        <span className="absolute inset-x-0 top-px h-px bg-[rgba(208,213,221,0.8)]" />
-      </div>
-    </div>
+    <GridPattern
+      className="top-0"
+      height={916}
+      cells={patternFilledCells}
+      gridTop={1}
+      gridPosition="16px 0"
+      mask="radial-gradient(686.346px 1315px at 720px 125px, #000 32%, transparent 95.3125%)"
+    >
+      <span className="absolute top-px left-[144px] h-16 w-[1216px] bg-surface opacity-90" />
+      <span className="absolute top-[65px] left-[80px] h-16 w-[1216px] bg-surface opacity-40" />
+      <span className="absolute inset-x-0 top-px h-px bg-[rgba(208,213,221,0.8)]" />
+    </GridPattern>
   );
 }
 
