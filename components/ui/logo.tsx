@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { site } from "@/content/site";
-import logoMark from "@/public/figma/logo-mark.svg";
+import logoMark from "@/public/figma/logo-mark.webp";
 
 export type LogoProps = {
   className?: string;

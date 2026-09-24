@@ -19,7 +19,8 @@ Act as a senior front-end engineer + UI/UX specialist: production-grade code, ex
 - Tailwind CSS v4 with `@theme` tokens in `app/globals.css`.
 - `next/font`: **Manrope** 400/500/600/700 (`--font-manrope`) and **Inter** 400/500/600/700 (`--font-inter`). See Typography below.
 - `next/image` for all raster images.
-- Framer Motion — only subtle motion, and only where the design implies it.
+- Motion: CSS only (keyframes in `globals.css`, all gated by `prefers-reduced-motion`). Framer Motion was removed in PHASE 5 — nothing used it.
+- `@vercel/analytics` + `@vercel/speed-insights` (in `app/layout.tsx`; enable both in the Vercel dashboard).
 - `lucide-react` **only** if an icon matches the Figma icon exactly; otherwise export the SVG from Figma.
 - `class-variance-authority` + `clsx` + `tailwind-merge` for component variants (`cn()` helper in `lib/utils.ts`).
 
@@ -123,6 +124,8 @@ Don't chase sub-2px decorative diffs — list them in the PR instead.
 ```
 
 - **Server Components by default.** `"use client"` only for interactive bits (navbar scroll/dropdowns/sheet, carousel, toggles, newsletter form, motion).
+- Client islands (PHASE 5 audit): `navbar` (dropdowns, mobile sheet — above the fold), `toggle` (`role="switch"` state), `testimonials-carousel` (scroll/keyboard/arrows), `newsletter-form` (submit states). ≈30KB gz of our own JS on `/`; the rest (~170KB gz) is the Next/React runtime. Not dynamically imported: each island is a few KB and `next/dynamic` would only delay its hydration. `lib/newsletter.ts` (zod) is imported type-only by the form, so zod stays server-side.
+- Heavy Figma SVG icons (glass tiles with a 73-path dot grid, ~43KB each) are shipped as 2× WebP (~2.4KB): `feature-*.webp`, `logo-mark.webp`. Rendered with sharp from the Figma SVG; mean diff vs the SVG 2.5/255 (edge anti-aliasing only).
 
 ## Quality gates (must pass before EVERY push)
 
