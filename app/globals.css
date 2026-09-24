@@ -17,6 +17,11 @@
   /* Border of the cyan "Stay in sync" card (Figma 1:2933). */
   --color-accent-cyan-line: #00c9f2;
   --color-accent-green: #25631f;
+  /* Section 7 card fills + priority badge fills (Figma 1:2760 / 1:2791 / 1:2854–2872). */
+  --color-accent-blue-soft: #cedaff;
+  --color-accent-green-soft: #d9f6d6;
+  --color-accent-red-soft: #fff0ea;
+  --color-primary-mist: #f3eff9;
   --color-accent-red: #ae1d12;
   --color-accent-blue: #2345de;
   --color-accent-orange: #ff4405;
@@ -78,6 +83,28 @@
 @theme inline {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-ui: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/*
+ * Horizontal scroll region with a right-edge fade. Where scroll-driven animations are supported,
+ * the fade disappears once the region is scrolled to the end.
+ */
+@utility scroll-fade-x {
+  mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent);
+
+  @media (width >= 80rem) {
+    mask-image: none;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    animation: scroll-fade-x-end linear both;
+    animation-timeline: scroll(self inline);
+  }
+}
+
+@keyframes scroll-fade-x-end {
+  95% { mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent); }
+  100% { mask-image: linear-gradient(to right, #000 100%, transparent); }
 }
 
 /* Content column is 1280px wide at desktop (Figma x=80 in a 1440 frame); gutters sit outside it. */
