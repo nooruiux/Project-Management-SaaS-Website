@@ -1,6 +1,7 @@
 import { DeliverProjects } from "@/components/sections/deliver-projects";
 import { Features } from "@/components/sections/features";
 import { Hero, HeroBackground } from "@/components/sections/hero";
+import { Integrations } from "@/components/sections/integrations";
 import { LogoCloud } from "@/components/sections/logo-cloud";
 import { Navbar } from "@/components/sections/navbar";
 import { StrategicPlanning } from "@/components/sections/strategic-planning";
@@ -24,6 +25,7 @@ export default function Home() {
         <WorkFaster />
         <StrategicPlanning />
         <DeliverProjects />
+        <Integrations />
       </main>
     </div>
   );
