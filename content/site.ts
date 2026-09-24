@@ -14,6 +14,6 @@ export const site: SiteConfig = {
   name: "WorkUp",
   title: "WorkUp — Streamline work for team productivity",
   description:
-    "Boost team collaboration and communication. Our platform provides a central hub for organizing tasks, track progress, and staying in sync.",
+    "Boost team collaboration and communication. Our platform provides a central hub for organizing tasks, tracking progress, and staying in sync.",
   url: productionUrl,
 };
