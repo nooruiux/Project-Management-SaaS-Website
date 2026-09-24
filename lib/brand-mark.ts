@@ -1,0 +1,12 @@
+/**
+ * WorkUp mark — the white glyph from the Figma logo (1:2308), in its 36×36 frame. Used to generate the
+ * favicon set and the OG image; the primary tile around it is 40×40 with radius 8 (Figma 1:2307).
+ */
+export const BRAND_MARK_PATH =
+  "M14.64 8.40001C13.3147 8.40001 12.24 9.47473 12.24 10.8V11.28H21.6C23.3232 11.28 24.72 12.6768 24.72 14.4V19.2C24.72 20.1278 23.9678 20.88 23.04 20.88H16.8C15.8722 20.88 15.12 20.1278 15.12 19.2V16.08H13.2C12.6696 16.08 12.24 16.5096 12.24 17.04V21.36C12.24 22.6853 13.3147 23.76 14.64 23.76H25.2C26.5253 23.76 27.6 22.6853 27.6 21.36V10.8C27.6 9.47473 26.5253 8.40001 25.2 8.40001H14.64ZM10.8 12.24C9.47473 12.24 8.40001 13.3147 8.40001 14.64V25.2C8.40001 26.5253 9.47473 27.6 10.8 27.6H21.36C22.6853 27.6 23.76 26.5253 23.76 25.2V24.72H14.4C12.6768 24.72 11.28 23.3232 11.28 21.6V16.8C11.28 15.8722 12.0322 15.12 12.96 15.12H19.2C20.1278 15.12 20.88 15.8722 20.88 16.8V19.92H22.8C23.3304 19.92 23.76 19.4904 23.76 18.96V14.64C23.76 13.3147 22.6853 12.24 21.36 12.24H10.8Z";
+
+export const BRAND_PRIMARY = "#633bc0";
+
+/** Full logo tile as a standalone SVG string (40×40 viewBox). */
+export const brandTileSvg = (radius = 8) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="${radius}" fill="${BRAND_PRIMARY}"/><path transform="translate(2 2)" d="${BRAND_MARK_PATH}" fill="#fff"/></svg>`;
