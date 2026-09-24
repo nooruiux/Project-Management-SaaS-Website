@@ -11,8 +11,11 @@ export type SectionHeadingProps = {
   as?: "h2" | "h3";
   tone?: "light" | "dark";
   className?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
 };
 
+// All section H2s use the `text-h2` token (40px desktop) with Figma's -2% tracking.
 export function SectionHeading({
   id,
   title,
@@ -21,11 +24,13 @@ export function SectionHeading({
   as: Heading = "h2",
   tone = "light",
   className,
+  titleClassName,
+  descriptionClassName,
 }: SectionHeadingProps) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-4",
+        "flex flex-col gap-6",
         align === "center" ? "items-center text-center" : "items-start text-left",
         className,
       )}
@@ -33,15 +38,22 @@ export function SectionHeading({
       <Heading
         id={id}
         className={cn(
-          "font-sans font-bold",
+          "font-sans font-bold tracking-[-0.02em]",
           Heading === "h2" ? "text-h2" : "text-h3",
           tone === "dark" ? "text-white" : "text-ink",
+          titleClassName,
         )}
       >
         {title}
       </Heading>
       {description ? (
-        <p className={cn("text-lead", tone === "dark" ? "text-white/80" : "text-ink-muted")}>
+        <p
+          className={cn(
+            "text-lead",
+            tone === "dark" ? "text-white/80" : "text-ink-subtle",
+            descriptionClassName,
+          )}
+        >
           {description}
         </p>
       ) : null}

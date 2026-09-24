@@ -104,6 +104,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Anchor targets land below the 96px sticky header. */
+  :where([id]) {
+    scroll-margin-top: 6rem;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
