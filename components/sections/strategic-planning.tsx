@@ -14,7 +14,7 @@ export function StrategicPlanning() {
   const { title, description, capabilities, cta, mockup } = strategicPlanning;
 
   return (
-    <section aria-labelledby="strategic-planning-title" className="py-16">
+    <section id="strategic-planning" aria-labelledby="strategic-planning-title" className="py-16">
       <div className="container-site">
         <div className="mx-auto flex max-w-[1240px] flex-col gap-10 overflow-hidden rounded-[24px] bg-accent-cyan px-5 py-10 md:px-10 md:py-12 xl:h-[550px] xl:flex-row xl:items-start xl:gap-[100px] xl:px-[min(60px,calc((100%-1120px)/2))] xl:pt-[68px] xl:pb-0">
           <div className="flex max-w-[560px] flex-col items-start gap-10 xl:w-[474px] xl:max-w-none xl:shrink-0">

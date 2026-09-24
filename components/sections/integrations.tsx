@@ -20,7 +20,7 @@ export function Integrations() {
   const { title, description, items, dots } = integrations;
 
   return (
-    <section aria-labelledby="integrations-title" className="py-16">
+    <section id="integrations" aria-labelledby="integrations-title" className="py-16">
       <div className="container-site">
         <div className="relative isolate mx-auto flex max-w-[1240px] flex-col items-center overflow-hidden rounded-[32px] bg-[#0b0b0b] px-5 pt-14 pb-12 md:px-10 lg:h-[704px] lg:pt-[72px] lg:pb-0">
           <Image

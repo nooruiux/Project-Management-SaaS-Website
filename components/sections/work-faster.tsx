@@ -21,7 +21,7 @@ export function WorkFaster() {
   const { title, description, cards } = workFaster;
 
   return (
-    <section aria-labelledby="work-faster-title" className="py-16">
+    <section id="work-faster" aria-labelledby="work-faster-title" className="py-16">
       <div className="container-site">
         <div className="mx-auto flex max-w-[1216px] flex-col items-center gap-16">
           <SectionHeading

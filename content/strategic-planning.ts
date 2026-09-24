@@ -1,4 +1,5 @@
 import type { StaticImageData } from "next/image";
+import { routes } from "@/content/routes";
 import chipCollab from "@/public/figma/icon-chip-collab.svg";
 import chipFile from "@/public/figma/icon-chip-file.svg";
 import chipUsers from "@/public/figma/icon-chip-users.svg";
@@ -18,7 +19,7 @@ export const strategicPlanning = {
     { label: "Collaboration", icon: chipCollab },
     { label: "Workflow Automation", icon: chipWorkflow },
   ] satisfies Capability[],
-  cta: { label: "Get started", href: "#" },
+  cta: { label: "Get started", href: routes.comingSoon },
   mockup: {
     src: tasksMockup,
     alt: "Three stacked task cards: 01 “Improve Fintech website’s UI design” (UI Improvement), 02 “Update Payment Gateway Integration” (Development, done) and 03 “Finance Website UX Research” (Research, done).",

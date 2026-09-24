@@ -12,7 +12,7 @@ export function Features() {
 
   // mt-1: Figma leaves a 4px gap between the logo cloud frame (ends y=1660) and this one (y=1664).
   return (
-    <section aria-labelledby="features-title" className="mt-1 py-16">
+    <section id="features" aria-labelledby="features-title" className="mt-1 py-16">
       <div className="container-site">
         <div className="mx-auto flex max-w-[1101px] flex-col items-center gap-16">
           <SectionHeading
