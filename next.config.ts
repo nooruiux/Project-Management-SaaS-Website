@@ -8,7 +8,8 @@ const isDev = process.env.NODE_ENV === "development";
 // vercel.live (+ its Pusher socket) is the preview-deployment feedback toolbar.
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://vercel.live`,
+  // Dev only: 'unsafe-eval' (React dev tooling) and the analytics debug scripts from va.vercel-scripts.com.
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ""} https://vercel.live`,
   "style-src 'self' 'unsafe-inline' https://vercel.live",
   "img-src 'self' blob: data: https://vercel.live https://vercel.com",
   "font-src 'self' https://vercel.live https://assets.vercel.com",
