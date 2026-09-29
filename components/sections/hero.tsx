@@ -88,8 +88,9 @@ function TeamAvatars() {
       aria-hidden="true"
       className="relative top-[0.047em] inline-flex items-center rounded-full bg-surface p-[0.0625em] align-middle drop-shadow-[8px_8px_20px_rgba(99,59,192,0.04)]"
     >
-      <Avatar src={avatar1} alt="" className="-mr-[0.1875em] size-[0.75em]" />
-      <Avatar src={avatar2} alt="" className="-mr-[0.1875em] size-[0.75em]" />
+      {/* 0.75em of the fluid H1: 48px from 1280, ~30–36px on phones. */}
+      <Avatar src={avatar1} alt="" sizes="(min-width: 1280px) 48px, 36px" className="-mr-[0.1875em] size-[0.75em]" />
+      <Avatar src={avatar2} alt="" sizes="(min-width: 1280px) 48px, 36px" className="-mr-[0.1875em] size-[0.75em]" />
       {/* Figma exports the "+" tile with its blur/shadow canvas: 176px around a 48px circle offset 56px. */}
       <span className="relative size-[0.75em] shrink-0">
         <Image
@@ -108,15 +109,16 @@ function TeamAvatars() {
 export function Hero() {
   const { announcement, headline } = hero;
 
+  // Phones: 48px top so the primary CTA sits in the first viewport (375×667, Fold 280×653).
   return (
-    <section aria-labelledby="hero-title" className="relative overflow-x-clip py-16">
+    <section aria-labelledby="hero-title" className="relative overflow-x-clip pt-12 pb-16 md:pt-16">
       <div className="container-site flex flex-col items-center gap-16">
         <div className="flex w-full max-w-[681px] flex-col items-center gap-10 text-center">
           <div className="flex flex-col items-center gap-6">
             <div className="flex flex-col items-center gap-4">
               <Link
                 href={announcement.href}
-                className="inline-flex max-w-full items-center gap-2 rounded-full border border-primary-border bg-primary-tint py-1 pr-2 pl-1 transition-colors hover:bg-primary-soft"
+                className="inline-flex max-w-full items-center gap-2 rounded-full border border-primary-border bg-primary-tint py-1 pr-2 pl-1 transition-colors hover:bg-primary-soft touch:min-h-11"
               >
                 <Badge variant="chip">
                   <Image src={stars} alt="" width={16} height={16} unoptimized />
@@ -132,7 +134,7 @@ export function Hero() {
                 Figma: 64/76, -1.28px tracking. Gaps are inline elements, never spaces; sr-only spaces keep the accessible text intact.
                 pb-0.5 + the CTA block's -mt-px reproduce Figma's rendered positions (its text box is 155px, not 2×76).
               */}
-              <h1 id="hero-title" className="pb-0.5 text-display leading-[1.1875] font-bold tracking-[-0.02em] text-ink">
+              <h1 id="hero-title" className="pb-0.5 text-display leading-[1.1875] font-bold tracking-[-0.02em] text-ink max-xl:text-balance">
                 {headline.beforeIcon}
                 <span className="sr-only"> </span>
                 <BoltBadge />
@@ -146,7 +148,7 @@ export function Hero() {
               </h1>
             </div>
             {/* Figma box is 637px; the approved "tracking" copy fix needs the full 681px column to stay on 2 lines. */}
-            <p className="max-w-[681px] text-lead text-ink-subtle">{hero.lead}</p>
+            <p className="max-w-[681px] text-lead text-ink-subtle max-xl:max-w-[34em] max-xl:text-pretty">{hero.lead}</p>
           </div>
 
           <div className="-mt-px flex w-full flex-col items-center gap-4">
@@ -169,7 +171,8 @@ export function Hero() {
                 {hero.secondaryCta.label}
               </Button>
             </div>
-            <p className="text-sm leading-[21px] text-ink-muted">{hero.note}</p>
+            {/* 16px on phones (body-size floor); Figma's 14px from 768. */}
+            <p className="text-sm leading-[21px] text-ink-muted max-md:text-base max-md:leading-6">{hero.note}</p>
           </div>
         </div>
 
