@@ -38,7 +38,8 @@ export function SectionHeading({
       <Heading
         id={id}
         className={cn(
-          "font-sans font-bold tracking-[-0.02em]",
+          // <1280 (no Figma frame): balanced lines, so no heading ends on a lone word.
+          "font-sans font-bold tracking-[-0.02em] max-xl:text-balance",
           Heading === "h2" ? "text-h2" : "text-h3",
           tone === "dark" ? "text-white" : "text-ink",
           titleClassName,
@@ -49,8 +50,8 @@ export function SectionHeading({
       {description ? (
         <p
           className={cn(
-            // Figma: every section lead uses an Inter body style.
-            "font-body text-lead",
+            // Figma: every section lead uses an Inter body style. <1280: ≤ ~70 characters per line, no widows.
+            "font-body text-lead max-xl:max-w-[34em] max-xl:text-pretty",
             tone === "dark" ? "text-white/80" : "text-ink-subtle",
             descriptionClassName,
           )}

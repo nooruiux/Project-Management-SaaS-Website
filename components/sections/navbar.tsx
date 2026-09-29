@@ -152,12 +152,13 @@ function MobileSheet({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="animate-sheet-in absolute inset-y-0 right-0 flex h-dvh w-full max-w-sm flex-col bg-surface shadow-xl"
+        // h-dvh follows the mobile address bar; safe-area padding keeps controls clear of notches/home indicator.
+        className="animate-sheet-in absolute inset-y-0 right-0 flex h-dvh w-full max-w-sm flex-col bg-surface pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] shadow-xl"
       >
         <h2 id={titleId} className="sr-only">
           Menu
         </h2>
-        <div className="flex h-24 shrink-0 items-center justify-between px-5">
+        <div className="flex h-18 shrink-0 items-center justify-between px-5 short:h-16! md:h-24">
           <Logo />
           <button
             ref={closeRef}
@@ -256,11 +257,14 @@ export function Navbar() {
       className={cn(
         // Divider is an inset shadow (not a border) so the bar stays exactly 96px like Figma.
         "sticky top-0 z-40 transition-[background-color,box-shadow,backdrop-filter] duration-200",
-        scrolled ? "bg-surface/80 shadow-[inset_0_-1px_0_var(--color-border)] backdrop-blur-md" : "bg-transparent",
+        // Translucent + blur where backdrop-filter works; a solid bar where it doesn't (no see-through text).
+        scrolled
+          ? "bg-surface shadow-[inset_0_-1px_0_var(--color-border)] backdrop-blur-md supports-[backdrop-filter:blur(0)]:bg-surface/80"
+          : "bg-transparent",
       )}
     >
-      {/* Figma 1:2303: 1240px content row, 24px vertical padding, 48px tall controls. */}
-      <div className="mx-auto flex h-24 w-full max-w-[calc(1240px+2*var(--gutter))] items-center justify-between gap-8 px-(--gutter) [--gutter:20px] md:[--gutter:32px]">
+      {/* Figma 1:2303: 1240px content row, 24px vertical padding, 48px tall controls. Phones 72px, short landscape 64px. */}
+      <div className="mx-auto flex h-18 w-full max-w-[calc(1240px+2*var(--gutter))] items-center justify-between gap-8 pr-[max(var(--gutter),env(safe-area-inset-right))] pl-[max(var(--gutter),env(safe-area-inset-left))] [--gutter:20px] short:h-16! md:h-24 md:[--gutter:32px]">
         <div className="flex items-center gap-8">
           <Logo />
           <nav aria-label="Primary" className="hidden lg:block">

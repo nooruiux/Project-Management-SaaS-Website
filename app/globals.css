@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+/* Hover styles only for a real hovering pointer, so a tap never leaves a "stuck" hover state. */
+@custom-variant hover {
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      @slot;
+    }
+  }
+}
+/* Touch-sized UI: everything below the 1280 desktop layout, plus touch devices at any width. */
+@custom-variant touch (@media (width < 80rem), (hover: none), (pointer: coarse));
+/* Short landscape screens (phones on their side). */
+@custom-variant short (@media (max-height: 31.25rem));
+
 @theme {
   /* Brand */
   --color-primary: #633bc0;
@@ -116,7 +129,9 @@
   width: 100%;
   max-width: calc(1280px + 2 * var(--gutter));
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  /* viewport-fit=cover: keep content clear of notches/rounded corners in landscape. */
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
 
   @media (width >= 48rem) {
     --gutter: 32px;
@@ -136,9 +151,23 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Anchor targets land below the 96px sticky header. */
+  /* Anchor targets land below the sticky header (96px; 64px on short landscape screens). */
   :where([id]) {
     scroll-margin-top: 6rem;
+
+    @media (max-height: 31.25rem) {
+      scroll-margin-top: 4.5rem;
+    }
+  }
+
+  /* No grey tap flash on iOS/Android; the focus-visible ring below stays the affordance. */
+  a,
+  button,
+  input,
+  label,
+  summary,
+  [role="switch"] {
+    -webkit-tap-highlight-color: transparent;
   }
 
   :focus-visible {
