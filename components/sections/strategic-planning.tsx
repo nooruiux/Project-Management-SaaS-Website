@@ -14,7 +14,7 @@ export function StrategicPlanning() {
   const { title, description, capabilities, cta, mockup } = strategicPlanning;
 
   return (
-    <section id="strategic-planning" aria-labelledby="strategic-planning-title" className="py-16">
+    <section id="strategic-planning" aria-labelledby="strategic-planning-title" className="py-16 md:max-xl:py-20">
       <div className="container-site">
         <div className="mx-auto flex max-w-[1240px] flex-col gap-10 overflow-hidden rounded-[24px] bg-accent-cyan px-5 py-10 md:px-10 md:py-12 xl:h-[550px] xl:flex-row xl:items-start xl:gap-[100px] xl:px-[min(60px,calc((100%-1120px)/2))] xl:pt-[68px] xl:pb-0">
           <div className="flex max-w-[560px] flex-col items-start gap-10 xl:w-[474px] xl:max-w-none xl:shrink-0">
@@ -60,7 +60,8 @@ export function StrategicPlanning() {
               width={617}
               height={491}
               quality={90}
-              sizes="(min-width: 1280px) 618px, (min-width: 768px) 618px, 100vw"
+              // Capped at 617px: from ~700px wide the cap is what renders.
+              sizes="(min-width: 700px) 618px, 100vw"
               className="mx-auto h-auto w-full max-w-[617.45px] xl:absolute xl:top-[-30.32px] xl:left-[-35.7px] xl:w-[617.45px] xl:max-w-none"
             />
           </div>
