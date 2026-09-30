@@ -21,7 +21,9 @@ const csp = [
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
-  ...(isDev ? [] : ["upgrade-insecure-requests"]),
+  // Only where the site is actually served over HTTPS (Vercel). WebKit applies it to http://localhost too,
+  // which would break `next start` in local/CI QA runs (every asset upgraded to https://localhost).
+  ...(process.env.VERCEL ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 const securityHeaders = [
