@@ -1,5 +1,5 @@
 import Image, { type StaticImageData } from "next/image";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { deliverProjects, type Priority } from "@/content/deliver-projects";
 import { cn } from "@/lib/utils";
 import chevronDown16 from "@/public/figma/icon-chevron-down-16.svg";
@@ -27,6 +27,9 @@ function Icon({ src, size }: { src: StaticImageData; size: number }) {
   return <Image src={src} alt="" aria-hidden="true" width={size} height={size} unoptimized className="shrink-0" />;
 }
 
+// <1280 the table scrolls sideways: the Project column stays pinned (opaque, with a hairline edge).
+const stickyCell = "max-xl:sticky max-xl:left-0 max-xl:z-[1] max-xl:bg-surface max-xl:shadow-[inset_-1px_0_0_rgb(26_21_26/0.12)]";
+
 function HeaderCell({ icon, children, className }: { icon: StaticImageData; children: ReactNode; className?: string }) {
   return (
     <th scope="col" className={cn("h-9 border-b border-ink/12 p-0 text-left align-top font-semibold", className)}>
@@ -42,7 +45,8 @@ function HeaderCell({ icon, children, className }: { icon: StaticImageData; chil
  * Figma 1:2837 — real table in Inter. Card p-32 (31 + 1px border), 1040px content; header row 36px, body rows 48px with
  * 1px ink/12 dividers; columns at x = 0 / 454 / 591 / 725 / 846 / 1017. Nesting indents 28px per level.
  * Chevrons, "…" and "+" icons are decorative (no behaviour designed); checkboxes are real inputs.
- * Below 1280px the table scrolls inside its own region (focusable, labelled) with a right-edge fade.
+ * Below 1280px the table scrolls inside its own region (focusable, labelled) with a right-edge fade; the Project
+ * column narrows (208px phones / 280px tablets), stays pinned, and titles wrap instead of truncating.
  */
 export function TaskTable() {
   const { table } = deliverProjects;
@@ -74,9 +78,9 @@ export function TaskTable() {
         // relative: contains the absolutely-positioned sr-only labels so they can't widen the page.
         className="scroll-fade-x relative mt-7 overflow-x-auto"
       >
-        <table className="w-full min-w-[1040px] table-fixed border-separate border-spacing-0">
+        <table className="w-full min-w-[794px] table-fixed border-separate border-spacing-0 md:min-w-[866px] xl:min-w-[1040px]">
           <colgroup>
-            <col className="w-[454px]" />
+            <col className="w-[208px] md:w-[280px] xl:w-[454px]" />
             <col className="w-[137px]" />
             <col className="w-[134px]" />
             <col className="w-[121px]" />
@@ -85,7 +89,9 @@ export function TaskTable() {
           </colgroup>
           <thead>
             <tr>
-              <HeaderCell icon={colProject}>{table.columns.project}</HeaderCell>
+              <HeaderCell icon={colProject} className={stickyCell}>
+                {table.columns.project}
+              </HeaderCell>
               <HeaderCell icon={colAssigned}>{table.columns.assigned}</HeaderCell>
               <HeaderCell icon={colDue}>{table.columns.due}</HeaderCell>
               <HeaderCell icon={colPriority}>{table.columns.priority}</HeaderCell>
@@ -99,8 +105,12 @@ export function TaskTable() {
           <tbody className="text-sm leading-5 text-ink">
             {table.rows.map((row) => (
               <tr key={row.title}>
-                <td className="h-12 border-b border-ink/12 p-0">
-                  <label className="flex items-center gap-3" style={{ paddingLeft: row.depth * 28 }}>
+                <td className={cn("h-12 border-b border-ink/12 p-0", stickyCell)}>
+                  {/* Indent 28px per level (16px on phones); 44px-tall label = checkbox tap target on touch layouts. */}
+                  <label
+                    className="flex items-center gap-3 pl-[calc(var(--depth)*16px)] md:pl-[calc(var(--depth)*28px)] touch:min-h-11 touch:py-1"
+                    style={{ "--depth": row.depth } as CSSProperties}
+                  >
                     <Icon src={row.expanded ? chevronDown16 : chevronRight16} size={16} />
                     {/* Checked state uses the Figma check-square icon from /public. */}
                     <input
@@ -108,7 +118,7 @@ export function TaskTable() {
                       defaultChecked={row.done}
                       className="size-4 shrink-0 cursor-pointer appearance-none rounded-xs border-[1.3px] border-[#8d92b0] bg-surface bg-center bg-no-repeat checked:border-0 checked:bg-[url(/figma/icon-check-square.svg)] checked:bg-size-[16px]"
                     />
-                    <span className="truncate font-medium">{row.title}</span>
+                    <span className="font-medium xl:truncate">{row.title}</span>
                   </label>
                 </td>
                 <td className="border-b border-ink/12 p-0">

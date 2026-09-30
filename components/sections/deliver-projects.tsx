@@ -10,7 +10,7 @@ function CardText({ title, description }: { title: string; description: string }
   return (
     <div className="flex flex-col gap-2">
       <h3 className="text-2xl leading-8 font-semibold text-ink">{title}</h3>
-      <p className="font-body text-base leading-6 text-ink-muted">{description}</p>
+      <p className="font-body text-base leading-6 text-ink-muted max-xl:max-w-[34em] max-xl:text-pretty">{description}</p>
     </div>
   );
 }
@@ -20,12 +20,14 @@ function CardText({ title, description }: { title: string; description: string }
  * two 540×384 cards 24px apart, then the task table 24px below.
  * Card A: toggle list built in code at the mockup's 0.894 scale (Inter 14.308/21.462, 32×18 switches),
  * panel 160px from the top and clipped 3px by the card. Card B: @2x export of the chart + meeting card.
+ * Touch-sized layouts (<1280 or touch screens): cards size to content (equal per row), 44px toggle rows
+ * whose whole row is the switch's <label>, and 20/24px card padding on phones/tablets.
  */
 export function DeliverProjects() {
   const { title, description, measure, efficiency } = deliverProjects;
 
   return (
-    <section id="deliver-projects" aria-labelledby="deliver-title" className="py-16">
+    <section id="deliver-projects" aria-labelledby="deliver-title" className="py-16 md:max-xl:py-20">
       <div className="container-site">
         <div className="mx-auto flex max-w-[1104px] flex-col items-center gap-16">
           <SectionHeading
@@ -48,7 +50,7 @@ export function DeliverProjects() {
           <div className="flex w-full flex-col gap-6">
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               {/* Card A — "Measure, learn, and improve" */}
-              <article className="relative isolate flex flex-col items-center gap-10 overflow-hidden rounded-lg border border-ink/12 bg-accent-blue-soft px-5 pt-[31px] shadow-[12px_12px_60px_0_rgba(0,0,0,0.06)] md:px-[31px] lg:h-[384px]">
+              <article className="relative isolate flex flex-col items-center gap-10 overflow-hidden rounded-lg border border-ink/12 bg-accent-blue-soft px-5 pt-5 shadow-[12px_12px_60px_0_rgba(0,0,0,0.06)] md:px-6 md:pt-6 xl:h-[384px] xl:px-[31px] xl:pt-[31px] touch:h-auto">
                 {/* Decorative inner glow frame (Figma 1:2761), bleeding 62px past the card box. */}
                 <Image
                   src={gradientFrame}
@@ -62,11 +64,13 @@ export function DeliverProjects() {
                 <div className="w-full max-w-[471px]">
                   <CardText title={measure.title} description={measure.description} />
                 </div>
-                <ul className="flex h-[227px] w-[285.08px] shrink-0 flex-col gap-1 rounded-t-md bg-surface px-4 py-3 font-ui shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]">
+                <ul className="flex h-[227px] w-[285.08px] max-w-full shrink-0 flex-col gap-1 rounded-t-md bg-surface px-4 py-3 font-ui shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] touch:h-auto">
                   {measure.toggles.map((option) => {
-                    const labelId = `toggle-${option.label.toLowerCase()}`;
+                    const switchId = `toggle-${option.label.toLowerCase()}`;
                     return (
-                      <li key={option.label} className="flex h-[36.31px] items-center justify-between">
+                      <li key={option.label}>
+                        {/* The whole row is the switch's label, so the tap target is the row (44px tall on touch). */}
+                        <label htmlFor={switchId} className="flex h-[36.31px] cursor-pointer items-center justify-between touch:h-11">
                         <span className="flex items-center gap-3">
                           <Image
                             src={option.icon}
@@ -77,11 +81,10 @@ export function DeliverProjects() {
                             unoptimized
                             className={cn("size-[21.462px]", option.mirrorIcon && "-scale-x-100")}
                           />
-                          <span id={labelId} className="text-[14.308px] leading-[21.462px] font-medium text-ink">
-                            {option.label}
-                          </span>
+                          <span className="text-[14.308px] leading-[21.462px] font-medium text-ink">{option.label}</span>
                         </span>
-                        <Toggle size="mockup" defaultChecked={option.on} aria-labelledby={labelId} />
+                        <Toggle id={switchId} size="mockup" defaultChecked={option.on} />
+                        </label>
                       </li>
                     );
                   })}
@@ -89,8 +92,8 @@ export function DeliverProjects() {
               </article>
 
               {/* Card B — "Enhance work efficiency" */}
-              <article className="flex flex-col overflow-hidden rounded-xl border border-accent-green/12 bg-accent-green-soft pt-[31px] lg:h-[384px]">
-                <div className="px-5 md:px-[31px] lg:max-w-[530px]">
+              <article className="flex flex-col overflow-hidden rounded-xl border border-accent-green/12 bg-accent-green-soft pt-5 md:pt-6 xl:h-[384px] xl:pt-[31px] touch:h-auto">
+                <div className="px-5 md:px-6 lg:max-w-[530px] xl:px-[31px]">
                   <CardText title={efficiency.title} description={efficiency.description} />
                 </div>
                 <Image
@@ -99,7 +102,7 @@ export function DeliverProjects() {
                   width={538}
                   height={261}
                   quality={90}
-                  sizes="(min-width: 1280px) 538px, (min-width: 1024px) 45vw, 100vw"
+                  sizes="(min-width: 1280px) 538px, (min-width: 1024px) 45vw, (min-width: 600px) 538px, 100vw"
                   className="mt-[2px] h-auto w-full max-w-[538px] self-center lg:max-w-none"
                 />
               </article>
