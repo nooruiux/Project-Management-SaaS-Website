@@ -69,6 +69,7 @@ npm run build
 **Noor Hossain** — UI/UX Designer & Front-End Developer (Next.js, React, Tailwind CSS) based in Dhaka, Bangladesh. I design in Figma and ship pixel-perfect, responsive, SEO-friendly websites.
 
 [![GitHub](https://img.shields.io/badge/GitHub-nooruiux-181717?style=flat-square&logo=github)](https://github.com/nooruiux)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-Chat_now-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://wa.me/8801913264543)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-noorxtk-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/noorxtk/)
 [![Behance](https://img.shields.io/badge/Behance-noorxtk-1769FF?style=flat-square&logo=behance&logoColor=white)](https://www.behance.net/noorxtk)
 [![Dribbble](https://img.shields.io/badge/Dribbble-Noorxtk-EA4C89?style=flat-square&logo=dribbble&logoColor=white)](https://dribbble.com/Noorxtk)
